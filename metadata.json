@@ -1,0 +1,6 @@
+{
+  "name": "Apex Motors — Автосалон",
+  "description": "Сайт премиального автосалона Apex Motors. Каталог автомобилей Mercedes-Benz, BMW, Porsche с модальным окном деталей и заказом.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Motors — Премиальный автосалон</title>
+  <meta name="description" content="Премиальный автосалон Apex Motors. Эксклюзивные автомобили Mercedes-Benz, BMW, Porsche в наличии.">
+  <meta property="og:title" content="Apex Motors — Премиальный автосалон">
+  <meta property="og:description" content="Эксклюзивный каталог автомобилей Mercedes-Benz, BMW, Porsche в салоне Apex Motors.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Стили проекта -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Axios: подключён строго ДО script.js по правилу урока -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <!-- Размытые фоновые световые пятна по макету home.png -->
+  <div class="glow glow-left" aria-hidden="true"></div>
+  <div class="glow glow-right" aria-hidden="true"></div>
+
+  <!-- Главный контейнер приложения -->
+  <div class="app-wrapper">
+    <!-- Шапка сайта (Header) строго по макету home.png -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">A</span>
+        <span class="logo-text">APEX <span class="logo-subtext">MOTORS</span></span>
+      </div>
+
+      <!-- Вкладки категорий брендов -->
+      <nav class="tabs" aria-label="Категории автомобилей">
+        <button type="button" class="tab-btn active" data-brand="mercedes">Mercedes</button>
+        <button type="button" class="tab-btn" data-brand="bmw">BMW</button>
+        <button type="button" class="tab-btn" data-brand="porsche">Porsche</button>
+      </nav>
+    </header>
+
+    <!-- Основная секция каталога -->
+    <main class="main-content">
+      <section class="catalog-header">
+        <div class="catalog-titles">
+          <p class="collection-tag">КОЛЛЕКЦИЯ 2026</p>
+          <h1 id="brandTitle" class="brand-title">Mercedes-Benz</h1>
+        </div>
+        <div id="modelsCount" class="models-count">5 моделей в салоне</div>
+      </section>
+
+      <!-- Сетка карточек автомобилей (заполняется циклом for в script.js) -->
+      <section class="cards" aria-label="Список доступных автомобилей">
+        <!-- Карточки будут добавлены скриптом -->
+      </section>
+    </main>
+  </div>
+
+  <!-- Модальное окно деталей автомобиля строго по макету form.png -->
+  <div id="carModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+
+    <div class="modal-container">
+      <!-- Кнопка закрытия по макету -->
+      <button type="button" class="modal-close" id="modalCloseBtn" aria-label="Закрыть окно">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="modal-content">
+        <!-- Левая колонка: Большое фото на чистом белом фоне со сменой цвета самой машины -->
+        <div class="modal-image-wrapper">
+          <div class="modal-image-container">
+            <img id="modalImage" class="modal-image" src="" alt="Автомобиль" />
+          </div>
+          <div id="modalImagePlaceholder" class="modal-image-placeholder">
+            <svg class="placeholder-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="3" ry="3"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <span id="modalPlaceholderText" class="placeholder-text">Фото: Mercedes-AMG G 63, крупно</span>
+            <span class="placeholder-browse">or browse files</span>
+          </div>
+        </div>
+
+        <!-- Правая колонка: Полная информация по макету form.png -->
+        <div class="modal-info">
+          <p id="modalCategoryTag" class="modal-tag">MERCEDES-AMG · 2026</p>
+          <h2 id="modalTitle" class="modal-title">Mercedes-AMG G 63</h2>
+          <div id="modalPrice" class="modal-price">$185,000</div>
+
+          <p id="modalDescription" class="modal-description">Описание автомобиля...</p>
+
+          <div class="modal-availability">
+            <span class="status-indicator"></span>
+            <span id="modalStockText">В наличии: <strong>3 шт.</strong></span>
+          </div>
+
+          <div class="modal-colors-section">
+            <div class="colors-label">
+              <span>Цвет: <span id="activeColorName" class="active-color-name">Obsidian Black</span></span>
+            </div>
+            <!-- Кружки доступных цветов (выводятся циклом for в script.js) -->
+            <div id="modalColors" class="colors-list"></div>
+          </div>
+
+          <!-- Кнопка «Заказать» по макету -->
+          <button type="button" class="btn btn-order-modal" id="modalOrderBtn">
+            Заказать
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Подключение скрипта логики сайта -->
+  <script src="js/script.js"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
